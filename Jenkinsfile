@@ -52,7 +52,7 @@ pipeline {
                         stage(jobs[i]){
                             steps {
                                 dir('output-' + jobs[i]) {
-                                    sh 'make'
+                                    sh 'make clean'
                                 }
                             }
                         }
