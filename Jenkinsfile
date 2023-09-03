@@ -30,5 +30,13 @@ pipeline {
                 }
             }
         }
+
+        stage('serial stage') {
+            steps {
+                script {
+                    parallelStagesMap
+                }
+            }
+        }
     }
 }
