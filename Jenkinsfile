@@ -1,22 +1,32 @@
-pipeline {
-    agent any
 
-    environment {
-        CONFIGS = 'beaglebone,raspberrypi2,raspberrypi4_64'
+def jobs = ["beaglebone", "raspberrypi2", "raspberrypi4_64"]
+ 
+def parallelStagesMap = jobs.collectEntries {
+    ["${it}" : generateStage(it)]
+}
+ 
+def generateStage(job) {
+    return {
+        stage("stage: ${job}") {
+                echo "This is ${job}."
+        }
     }
-
+}
+ 
+pipeline {
+    agent none
+ 
     stages {
-        stage('Get Buildroot') {
+        stage('non-parallel stage') {
             steps {
-                echo 'Downloading Buildroot'
+                echo 'This stage will be executed first.'
             }
         }
-        stage('make defconfig') {
+ 
+        stage('parallel stage') {
             steps {
                 script {
-                    CONFIGS.tokenize(',').each {
-                        echo "make ${it}_defconfig"
-                    }
+                    parallel parallelStagesMap
                 }
             }
         }
