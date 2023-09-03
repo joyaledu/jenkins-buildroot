@@ -22,22 +22,25 @@ pipeline {
                         sh 'mkdir output-beaglebone'
                     }
                     stages {
-                        dir('output-beaglebone') {
-                            stage('Prepare Config') {
-                                steps {
-                                    echo 'Preparing Config'
+                        stage('Prepare Config') {
+                            steps {
+                                echo 'Preparing Config'
+                                dir('output-beaglebone') {
                                     sh 'make -C ../buildroot O=$(pwd) menuconfig'
                                 }
                             }
-                            stage('Build Image') {
-                                steps {
-                                    echo 'Building Image'
+                        }
+                        stage('Build Image') {
+                            steps {
+                                echo 'Building Image'
+                                dir('output-beaglebone') {
                                     sh 'make clean'
                                 }
                             }
                         }
                     }
                 }
+            
                 stage('Raspberry Pi') {
                     stages {
                         stage('Prepare Config') {
