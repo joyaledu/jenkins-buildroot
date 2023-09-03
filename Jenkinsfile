@@ -31,12 +31,8 @@ pipeline {
             }
         }
 
-        stage('serial stage') {
-            steps {
-                script {
-                    parallelStagesMap
-                }
-            }
+        for (int i = 0; i < jobs.length; i++) {
+            generateStage(jobs[i]);
         }
     }
 }
