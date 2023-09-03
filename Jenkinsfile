@@ -17,22 +17,17 @@ pipeline {
         stage('Buildroot Builds') {
             parallel {
                 stage('Beaglebone') {
-                    steps {
-                        echo 'Creating Directory'
-                        sh 'mkdir output-beaglebone'
-                    }
                     stages {
                         stage('Prepare Config') {
                             steps {
-                                echo 'Preparing Config'
-                                dir('output-beaglebone') {
-                                    sh 'make -C ../buildroot O=$(pwd) menuconfig'
-                                }
+                                sh '''
+                                    mkdir output-beaglebone'
+                                    make -C ../buildroot O=$(pwd) menuconfig
+                                '''
                             }
                         }
                         stage('Build Image') {
                             steps {
-                                echo 'Building Image'
                                 dir('output-beaglebone') {
                                     sh 'make clean'
                                 }
