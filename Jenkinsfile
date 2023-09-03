@@ -8,6 +8,7 @@ pipeline {
                     sh 'pwd'
                     sh 'wget https://buildroot.org/downloads/buildroot-2023.02.4.tar.gz'
                     sh 'tar -xvzf buildroot-2023.02.4.tar.gz'
+                    sh 'rm -rf buildroot'
                     sh 'mv buildroot-2023.02.4 buildroot'
                     sh 'ls'
             }
