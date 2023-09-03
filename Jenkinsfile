@@ -29,7 +29,7 @@ pipeline {
                         stage('Build Image') {
                             steps {
                                 dir('output-beaglebone') {
-                                    sh 'make clean'
+                                    sh 'make'
                                 }
                             }
                         }
@@ -50,7 +50,7 @@ pipeline {
                         stage('Build Image') {
                             steps {
                                 dir('output-beaglebone_qt5') {
-                                    sh 'make clean'
+                                    sh 'make'
                                 }
                             }
                         }
@@ -71,7 +71,7 @@ pipeline {
                         stage('Build Image') {
                             steps {
                                 dir('output-raspberrypi2') {
-                                    sh 'make clean'
+                                    sh 'make'
                                 }
                             }
                         }
@@ -92,7 +92,7 @@ pipeline {
                         stage('Build Image') {
                             steps {
                                 dir('output-raspberrypi4') {
-                                    sh 'make clean'
+                                    sh 'make'
                                 }
                             }
                         }
@@ -113,7 +113,7 @@ pipeline {
                         stage('Build Image') {
                             steps {
                                 dir('output-raspberrypi4_64') {
-                                    sh 'make clean'
+                                    sh 'make'
                                 }
                             }
                         }
@@ -134,7 +134,7 @@ pipeline {
                         stage('Build Image') {
                             steps {
                                 dir('output-raspberrypizero2w') {
-                                    sh 'make clean'
+                                    sh 'make'
                                 }
                             }
                         }
