@@ -18,12 +18,11 @@ pipeline {
                     stages {
                         stage('Prepare Config') {
                             steps {
-                                sh '''
-                                    rm -rf output-beaglebone
-                                    mkdir output-beaglebone
-                                    cd output-beaglebone
-                                    make -C ../buildroot O=$(pwd) beaglebone_defconfig
-                                '''
+                                sh 'rm -rf output-beaglebone'
+                                sh 'mkdir output-beaglebone'
+                                dir('output-beaglebone') {
+                                    sh 'make -C ../buildroot O=$(pwd) beaglebone_defconfig'
+                                }
                             }
                         }
                         stage('Build Image') {
