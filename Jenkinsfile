@@ -21,7 +21,7 @@ pipeline {
                         stage('Prepare Config') {
                             steps {
                                 sh '''
-                                    mkdir output-beaglebone'
+                                    mkdir output-beaglebone
                                     make -C ../buildroot O=$(pwd) menuconfig
                                 '''
                             }
