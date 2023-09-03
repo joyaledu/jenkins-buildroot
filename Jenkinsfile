@@ -5,13 +5,11 @@ pipeline {
         stage('Get Buildroot') {
             steps {
                 echo 'Downloading Buildroot'
-                sh '''
-                    pwd
-                    wget https://buildroot.org/downloads/buildroot-2023.02.4.tar.gz
-                    mv buildroot-2023.02.4.tar.gz buildroot.tar.gz
-                    tar -xvzf buildroot.tar.gz
-                    ls
-                '''
+                    sh 'pwd'
+                    sh 'wget https://buildroot.org/downloads/buildroot-2023.02.4.tar.gz'
+                    sh 'mv buildroot-2023.02.4.tar.gz buildroot.tar.gz'
+                    sh 'tar -xvzf buildroot.tar.gz'
+                    sh 'ls'
             }
         }
         stage('Buildroot Builds') {
