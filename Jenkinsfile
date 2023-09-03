@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     jobs.each {
-                        generateStage(${it});
+                        generateStage("${it}");
                     }
                 }
             }
