@@ -35,6 +35,7 @@ pipeline {
                         }
                     }
                 }
+
                 stage('beaglebone_qt5') {
                     stages {
                         stage('Prepare Config') {
@@ -49,6 +50,90 @@ pipeline {
                         stage('Build Image') {
                             steps {
                                 dir('output-beaglebone_qt5') {
+                                    sh 'make clean'
+                                }
+                            }
+                        }
+                    }
+                }
+
+                stage('raspberrypi2') {
+                    stages {
+                        stage('Prepare Config') {
+                            steps {
+                                sh 'rm -rf output-raspberrypi2'
+                                sh 'mkdir output-raspberrypi2'
+                                dir('output-raspberrypi2') {
+                                    sh 'make -C ../buildroot O=$(pwd) raspberrypi2_defconfig'
+                                }
+                            }
+                        }
+                        stage('Build Image') {
+                            steps {
+                                dir('output-raspberrypi2') {
+                                    sh 'make clean'
+                                }
+                            }
+                        }
+                    }
+                }
+
+                stage('raspberrypi4') {
+                    stages {
+                        stage('Prepare Config') {
+                            steps {
+                                sh 'rm -rf output-raspberrypi4'
+                                sh 'mkdir output-raspberrypi4'
+                                dir('output-raspberrypi4') {
+                                    sh 'make -C ../buildroot O=$(pwd) raspberrypi4_defconfig'
+                                }
+                            }
+                        }
+                        stage('Build Image') {
+                            steps {
+                                dir('output-raspberrypi4') {
+                                    sh 'make clean'
+                                }
+                            }
+                        }
+                    }
+                }
+
+                stage('raspberrypi4_64') {
+                    stages {
+                        stage('Prepare Config') {
+                            steps {
+                                sh 'rm -rf output-raspberrypi4_64'
+                                sh 'mkdir output-raspberrypi4_64'
+                                dir('output-raspberrypi4_64') {
+                                    sh 'make -C ../buildroot O=$(pwd) raspberrypi4_64_defconfig'
+                                }
+                            }
+                        }
+                        stage('Build Image') {
+                            steps {
+                                dir('output-raspberrypi4_64') {
+                                    sh 'make clean'
+                                }
+                            }
+                        }
+                    }
+                }
+
+                stage('raspberrypizero2w') {
+                    stages {
+                        stage('Prepare Config') {
+                            steps {
+                                sh 'rm -rf output-raspberrypizero2w'
+                                sh 'mkdir output-raspberrypizero2w'
+                                dir('output-raspberrypizero2w') {
+                                    sh 'make -C ../buildroot O=$(pwd) raspberrypizero2w_defconfig'
+                                }
+                            }
+                        }
+                        stage('Build Image') {
+                            steps {
+                                dir('output-raspberrypizero2w') {
                                     sh 'make clean'
                                 }
                             }
