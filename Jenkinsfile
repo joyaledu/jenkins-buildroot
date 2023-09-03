@@ -11,24 +11,11 @@ pipeline {
                 echo 'Downloading Buildroot'
             }
         }
-        stage('Buildroot Builds') {
-            script {
-                parallel {
+        stage('make ${it}_defconfig') {
+            steps {
+                script {
                     CONFIGS.tokenize(',').each {
-                        stage('${it}') {
-                            stages {
-                                stage('make ${it}_defconfig') {
-                                    steps {
-                                        echo 'make ${it}_defconfig'
-                                    }
-                                }
-                                stage('Build ${it} image') {
-                                    steps {
-                                        echo 'make'
-                                    }
-                                }
-                            }
-                        }
+                        echo 'make ${it}_defconfig'
                     }
                 }
             }
