@@ -21,8 +21,8 @@ pipeline {
                         echo 'Creating Directory'
                         sh 'mkdir output-beaglebone'
                     }
-                    dir('output-beaglebone') {
-                        stages {
+                    stages {
+                        dir('output-beaglebone') {
                             stage('Prepare Config') {
                                 steps {
                                     echo 'Preparing Config'
