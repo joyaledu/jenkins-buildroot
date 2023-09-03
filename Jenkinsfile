@@ -21,6 +21,7 @@ pipeline {
                         stage('Prepare Config') {
                             steps {
                                 sh '''
+                                    rm -rf output-beaglebone
                                     mkdir output-beaglebone
                                     make -C ../buildroot O=$(pwd) beaglebone_defconfig
                                 '''
