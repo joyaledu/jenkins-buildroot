@@ -31,8 +31,14 @@ pipeline {
             }
         }
 
-        for (int i = 0; i < jobs.length; i++) {
-            generateStage(jobs[i]);
+        stage('serial stage') {
+            steps {
+                script {
+                    for (int i = 0; i < jobs.length; i++) {
+                        generateStage(jobs[i]);
+                    }
+                }
+            }
         }
     }
 }
