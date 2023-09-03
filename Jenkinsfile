@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     CONFIGS.tokenize(',').each {
-                        echo 'make ${it}_defconfig'
+                        echo "make ${it}_defconfig"
                     }
                 }
             }
