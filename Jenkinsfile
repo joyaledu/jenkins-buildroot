@@ -23,6 +23,7 @@ pipeline {
                                 sh '''
                                     rm -rf output-beaglebone
                                     mkdir output-beaglebone
+                                    cd output-beaglebone
                                     make -C ../buildroot O=$(pwd) beaglebone_defconfig
                                 '''
                             }
