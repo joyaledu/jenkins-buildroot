@@ -8,7 +8,13 @@ def parallelStagesMap = jobs.collectEntries {
 def generateStage(job) {
     return {
         stage("stage: ${job}") {
-                echo "This is ${job}."
+            steps {
+                sh 'rm -rf output-${job}'
+                sh 'mkdir output-${job}'
+                dir('output-${job}') {
+                    sh 'make -C ../buildroot O=$(pwd) ${job}_defconfig'
+                }
+            }
         }
     }
 }
@@ -17,13 +23,19 @@ pipeline {
     agent any
  
     stages {
-        stage('non-parallel stage') {
+        stage('fetch buildroot') {
             steps {
-                echo 'This stage will be executed first.'
+                echo 'Downloading Buildroot'
+                sh 'pwd'
+                sh 'wget https://buildroot.org/downloads/buildroot-2023.02.4.tar.gz'
+                sh 'tar -xvzf buildroot-2023.02.4.tar.gz'
+                sh 'rm -rf buildroot'
+                sh 'mv buildroot-2023.02.4 buildroot'
+                sh 'ls'
             }
         }
  
-        stage('parallel stage') {
+        stage('config') {
             steps {
                 script {
                     parallel parallelStagesMap
@@ -31,13 +43,16 @@ pipeline {
             }
         }
 
-        stage('serial stage') {
+        stage('building') {
             steps {
                 script {
                     for(int i=0; i < jobs.size(); i++) {
                         stage(jobs[i]){
-                            echo "Element: $i"
-                        }
+                            steps {
+                                dir('output-' + jobs[i]) {
+                                    sh 'make'
+                                }
+                            }                        }
                     }
                 }
             }
