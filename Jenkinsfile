@@ -13,7 +13,7 @@ def generateStage(job) {
                 sh "rm -rf output-${job}"
                 sh "mkdir output-${job}"
                 dir("output-${job}") {
-                    sh "make -C ../buildroot O=$(pwd) ${job}" + "_defconfig"
+                    sh "make -C ../buildroot O=$(pwd) $\{job}" + "_defconfig"
                 }
             }
         }
