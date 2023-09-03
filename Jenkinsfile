@@ -22,7 +22,7 @@ pipeline {
                             steps {
                                 sh '''
                                     mkdir output-beaglebone
-                                    make -C ../buildroot O=$(pwd) menuconfig
+                                    make -C ../buildroot O=$(pwd) beaglebone_defconfig
                                 '''
                             }
                         }
