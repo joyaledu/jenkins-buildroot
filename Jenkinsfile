@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Get Buildroot') {
+            steps {
+                echo 'Downloading Buildroot'
+            }
+        }
         stage('Buildroot Builds') {
             parallel {
                 stage('Beaglebone') {
