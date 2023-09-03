@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Buildroot Builds') {
             parallel {
-                stage('Beaglebone') {
+                stage('beaglebone') {
                     stages {
                         stage('Prepare Config') {
                             steps {
@@ -34,21 +34,25 @@ pipeline {
                         }
                     }
                 }
-            
-                stage('Raspberry Pi') {
+                stage('beaglebone_qt5') {
                     stages {
                         stage('Prepare Config') {
                             steps {
-                                echo 'Preparing Config'
+                                sh 'rm -rf output-beaglebone_qt5'
+                                sh 'mkdir output-beaglebone_qt5'
+                                dir('output-beaglebone_qt5') {
+                                    sh 'make -C ../buildroot O=$(pwd) beaglebone_qt5_defconfig'
+                                }
                             }
                         }
                         stage('Build Image') {
                             steps {
-                                echo 'Building Image'
+                                dir('output-beaglebone_qt5') {
+                                    sh 'make clean'
+                                }
                             }
                         }
                     }
-
                 }
             }
         }
