@@ -12,8 +12,8 @@ pipeline {
             }
         }
         stage('Buildroot Builds') {
-            parallel {
-                script {
+            script {
+                parallel {
                     CONFIGS.tokenize(',').each {
                         stage('${it}') {
                             stages {
