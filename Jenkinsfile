@@ -5,6 +5,8 @@ pipeline {
         stage('Get Buildroot') {
             steps {
                 echo 'Downloading Buildroot'
+                sh 'pwd'
+                sh 'wget https://buildroot.org/downloads/buildroot-2023.02.4.tar.gz'
             }
         }
         stage('Buildroot Builds') {
