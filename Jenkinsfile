@@ -8,7 +8,8 @@ pipeline {
                 sh '''
                     pwd
                     wget https://buildroot.org/downloads/buildroot-2023.02.4.tar.gz
-                    tar -xvzf buildroot-2023.02.4.tar.gz buildroot
+                    mv buildroot-2023.02.4.tar.gz buildroot.tar.gz
+                    tar -xvzf buildroot.tar.gz
                     ls
                 '''
             }
@@ -16,15 +17,23 @@ pipeline {
         stage('Buildroot Builds') {
             parallel {
                 stage('Beaglebone') {
-                    stages {
-                        stage('Prepare Config') {
-                            steps {
-                                echo 'Preparing Config'
+                    steps {
+                        echo 'Creating Directory'
+                        sh 'mkdir output-beaglebone'
+                    }
+                    dir('output-beaglebone') {
+                        stages {
+                            stage('Prepare Config') {
+                                steps {
+                                    echo 'Preparing Config'
+                                    sh 'make -C ../buildroot O=$(pwd) menuconfig'
+                                }
                             }
-                        }
-                        stage('Build Image') {
-                            steps {
-                                echo 'Building Image'
+                            stage('Build Image') {
+                                steps {
+                                    echo 'Building Image'
+                                    sh 'make clean'
+                                }
                             }
                         }
                     }
