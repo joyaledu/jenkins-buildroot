@@ -8,7 +8,7 @@ def parallelStagesMap = jobs.collectEntries {
 def generateStage(job) {
     return {
         stage("stage: ${job}") {
-            steps {
+            step {
                 echo "configuring ${job}"
                 sh "rm -rf output-${job}"
                 sh "mkdir output-${job}"
