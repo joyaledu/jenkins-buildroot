@@ -34,8 +34,10 @@ pipeline {
         stage('serial stage') {
             steps {
                 script {
-                    jobs.each {
-                        generateStage("${it}");
+                    stages {
+                        jobs.each {
+                            generateStage("${it}");
+                        }
                     }
                 }
             }
