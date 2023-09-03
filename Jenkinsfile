@@ -19,9 +19,19 @@ pipeline {
                     }
                 }
                 stage('Raspberry Pi') {
-                    steps {
-                        echo 'Raspberry Pi builds'
+                    stages {
+                        stage('Prepare Config') {
+                            steps {
+                                echo 'Preparing Config'
+                            }
+                        }
+                        stage('Build Image') {
+                            steps {
+                                echo 'Building Image'
+                            }
+                        }
                     }
+
                 }
             }
         }
