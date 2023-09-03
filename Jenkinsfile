@@ -14,7 +14,7 @@ def generateStage(job) {
 }
  
 pipeline {
-    agent none
+    agent any
  
     stages {
         stage('non-parallel stage') {
@@ -34,7 +34,11 @@ pipeline {
         stage('serial stage') {
             steps {
                 script {
-                    stage parallelStagesMap
+                    for(int i=0; i < jobs.size(); i++) {
+                        stage(jobs[i]){
+                            echo "Element: $i"
+                        }
+                    }
                 }
             }
         }
