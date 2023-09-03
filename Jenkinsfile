@@ -11,7 +11,7 @@ pipeline {
                 echo 'Downloading Buildroot'
             }
         }
-        stage('make ${it}_defconfig') {
+        stage('make defconfig') {
             steps {
                 script {
                     CONFIGS.tokenize(',').each {
