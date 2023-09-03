@@ -9,10 +9,11 @@ def generateStage(job) {
     return {
         stage("stage: ${job}") {
             steps {
-                sh 'rm -rf output-${job}'
-                sh 'mkdir output-${job}'
-                dir('output-${job}') {
-                    sh 'make -C ../buildroot O=$(pwd) ${job}_defconfig'
+                echo "configuring ${job}"
+                sh "rm -rf output-${job}"
+                sh "mkdir output-${job}"
+                dir("output-${job}") {
+                    sh "make -C ../buildroot O=$(pwd) ${job}_defconfig"
                 }
             }
         }
@@ -53,7 +54,8 @@ pipeline {
                                 dir('output-' + jobs[i]) {
                                     sh 'make'
                                 }
-                            }                        }
+                            }
+                        }
                     }
                 }
             }
