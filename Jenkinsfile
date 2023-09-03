@@ -7,8 +7,8 @@ pipeline {
                 echo 'Downloading Buildroot'
                     sh 'pwd'
                     sh 'wget https://buildroot.org/downloads/buildroot-2023.02.4.tar.gz'
-                    sh 'mv buildroot-2023.02.4.tar.gz buildroot.tar.gz'
-                    sh 'tar -xvzf buildroot.tar.gz'
+                    sh 'tar -xvzf buildroot-2023.02.4.tar.gz'
+                    sh 'mv buildroot-2023.02.4 buildroot'
                     sh 'ls'
             }
         }
